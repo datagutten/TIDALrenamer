@@ -55,8 +55,6 @@ class tidalinfo
 	}
 	function get_token()
 	{
-		$data=$this->query('http://tidal.com/scripts/scripts.e1d6601b.js');
-		file_put_contents('check',$data);
 		preg_match('/this.token="(.+)"/U',$data,$token);
 		return $token[1];
 	}
