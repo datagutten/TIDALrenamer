@@ -61,12 +61,16 @@ else
 			$trackinfo=$tracklist['items'][$key];
 		elseif(isset($options['id'])) //Files names by track id
 		{
-			$trackinfo=$info->track($trackid);
+			$trackinfo=$info->track($pathinfo['filename']);
 			$albuminfo=$info->album($trackinfo['album']['id']);
 		}
 		else
 			throw new Exception("No valid options");
-
+		if($trackinfo===false || (isset($albuminfo) && $albuminfo===false))
+		{
+			echo $info->error."\n";
+			continue;
+		}
 		$trackinfo['track']=$trackinfo['trackNumber'];
 		$trackinfo['artist']=$trackinfo['artist']['name'];
 		if(!isset($options['playlist']))
