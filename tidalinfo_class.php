@@ -55,7 +55,15 @@ class tidalinfo
 	}
 	function get_token()
 	{
+		if(!is_resource($this->ch))
+			$this->init_curl();
+		$data=$this->query('http://tidal.com/scripts/scripts.28290a4f.js');
 		preg_match('/this.token="(.+)"/U',$data,$token);
+		if(empty($token[1]))
+		{
+			$this->error='Unable to get token';
+			return false;
+		}
 		return $token[1];
 	}
 	function api_request($topic,$id,$field='',$url_extra='')
@@ -66,6 +74,8 @@ class tidalinfo
 		//Can use sessionId or token
 		if(empty($this->token))
 			$this->token=$this->get_token();
+		if($this->token===false)
+			return false;
 
 		$url=sprintf('http://api.tidalhifi.com/v1/%s/%s/%s?token=%s&countryCode=%s%s',$topic,$id,$field,$this->token,$this->countryCode,$url_extra);
 		return $this->parse_response($this->query($url));	
@@ -73,10 +83,6 @@ class tidalinfo
 
 	function album($id,$tracks=false)
 	{
-		if(empty($this->token))
-			$this->token=$this->get_token();
-
-		//$url=sprintf('http://api.tidalhifi.com/v1/albums/%s/tracks?token=%s&countryCode=%s',$id,$this->token,$this->countryCode);
 		if($tracks)
 			$field='tracks';
 		else
@@ -91,6 +97,8 @@ class tidalinfo
 	function playlist($id)
 	{
  		$playlist_info=$this->api_request('playlists',$id);
+		if($playlist_info===false)
+			return false;
 		$limit=ceil($playlist_info['numberOfTracks']/100)*100;
  		$playlist_tracks=$this->api_request('playlists',$id,'tracks',"&limit=$limit&orderDirection=ASC");
 		return array_merge($playlist_info,$playlist_tracks);
