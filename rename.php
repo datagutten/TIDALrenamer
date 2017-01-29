@@ -84,6 +84,8 @@ else
 			$trackinfo['cover']=$albuminfo['cover'];
 			if($albuminfo['artist']['id']==2935) //If album artist is "Various Artists" the album is a compilation
 				$trackinfo['compilation']=true;
+			if(empty($trackinfo['year']) && preg_match('/([0-9]{4})/',$trackinfo['copyright'],$year))
+				$trackinfo['year']=$year[1];
 		}
 		else
 		{
