@@ -1,12 +1,12 @@
 <?Php
 require 'config.php';
-require 'tidalinfo_class.php';
+require_once 'tidalinfo_class.php';
 $info=new tidalinfo;
-
-require 'audio-metadata/metadata.php';
+require_once 'audio-metadata/metadata.php';
 $metadata=new metadata;
+
 if(!isset($options))
-	$options = getopt("",array('compilation::','album:','playlist:','order','id','nodelete'));
+	$options = getopt("",array('compilation::','album:','playlist:','order','id','nodelete','flac'));
 if(empty($options))
 	$error="Sample usage:\nRename a playlist:\tphp rename.php --order --playlist 43acd778-4985-4304-a460-37e5565881b8\nRename an album:\tphp rename.php --order --album 530705\nAlbum and playlist parameters also accepts URLs containing the id.\n";
 else
@@ -52,6 +52,7 @@ else
 		$error="--album or --playlist is required when using --order\n";
 	
 }
+
 if(!empty($error))
 	echo $error."\n";
 else
@@ -98,6 +99,18 @@ else
 			$trackinfo['totaltracks']=$tracklist['numberOfTracks'];
 			$trackinfo['cover']=$tracklist['image'];
 			$trackinfo['compilation']=true; //Playlists are always compilations
+		}
+
+		if(isset($options['flac']) && $pathinfo['extension']!='flac') //Convert to flac
+		{
+			$tempfile=$metadata->convert_to_flac($file);
+			if($tempfile===false)
+				echo $metadata->error;
+			else
+			{
+				unlink($file); //Remove original file
+				$file=$tempfile;
+			}
 		}
 
 		$return=$metadata->metadata($file,$config['sortedpath'],$trackinfo);
