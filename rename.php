@@ -15,7 +15,11 @@ else
 		$path=$inpath_order;
 	else
 		$path=$inpath_id;
+
 	$files=array_merge(glob($path.'/*.m4a'),glob($path.'/*.flac'));
+	if(empty($files))
+		die(sprintf("No files to be renamed in %s\n",$path));
+
 	sort($files);
 	$filecount=count($files);
 	if(isset($options['album']))
