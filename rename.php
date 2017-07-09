@@ -33,7 +33,7 @@ else
 			$albuminfo=$info->album($options['album']); //Get info about the album itself
 			$tracklist=$info->album($options['album'],true);
 			if($filecount!=$albuminfo['numberOfTracks'])
-				$error="Album countains {$albuminfo['numberOfTracks']} tracks, but there is $filecount files in $path";
+				$error="Album contains {$albuminfo['numberOfTracks']} tracks, but there is $filecount files in $path";
 		}
 	}
 	elseif(isset($options['playlist']))
