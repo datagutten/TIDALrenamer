@@ -78,6 +78,7 @@ else
 		}
 		$trackinfo['track']=$trackinfo['trackNumber'];
 		$trackinfo['artist']=$trackinfo['artist']['name'];
+		$trackinfo['albumyear']=date('Y',strtotime($albuminfo['releaseDate']));
 		if(!isset($options['playlist']))
 		{
 			$trackinfo['album']=$trackinfo['album']['title'];
@@ -100,7 +101,6 @@ else
 			$trackinfo['cover']=$tracklist['image'];
 			$trackinfo['compilation']=true; //Playlists are always compilations
 		}
-
 		if(isset($options['flac']) && $pathinfo['extension']!='flac') //Convert to flac
 		{
 			$tempfile=$metadata->convert_to_flac($file);
