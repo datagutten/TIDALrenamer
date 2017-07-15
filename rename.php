@@ -105,7 +105,7 @@ else
 		{
 			$tempfile=$metadata->convert_to_flac($file);
 			if($tempfile===false)
-				echo $metadata->error;
+				echo $metadata->error."\n";
 			else
 			{
 				unlink($file); //Remove original file
