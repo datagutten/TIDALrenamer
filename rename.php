@@ -12,9 +12,9 @@ if(empty($options))
 else
 {
 	if(isset($options['order']))
-		$path=$inpath_order;
+		$path=$config['inpath_order'];
 	else
-		$path=$inpath_id;
+		$path=$config['inpath_id'];
 
 	$files=array_merge(glob($path.'/*.m4a'),glob($path.'/*.flac'));
 	if(empty($files))
