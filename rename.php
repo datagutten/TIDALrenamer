@@ -1,6 +1,6 @@
 <?Php
 require 'config.php';
-require_once 'tidalinfo_class.php';
+require_once 'TIDALtools/tidalinfo.class.php';
 $info=new tidalinfo;
 require_once 'audio-metadata/metadata.php';
 $metadata=new metadata;

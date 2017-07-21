@@ -4,3 +4,6 @@
 [submodule "tools"]
 	path = tools
 	url = git@github.com:datagutten/tools.git
+[submodule "TIDALtools"]
+	path = TIDALtools
+	url = https://github.com/datagutten/TIDALtools.git
