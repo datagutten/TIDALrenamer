@@ -64,6 +64,18 @@ class tidalinfo
 		}
 		return $token[1];
 	}
+	function get_id($id_or_url,$topic='')
+	{
+		if(is_numeric($id_or_url))
+			return $id_or_url;
+		elseif(!preg_match(sprintf('#%s/([0-9]+)#',$topic),$url,$id))
+		{
+			$this->error=sprintf('Invalid %s URL',$topic);
+			return false;
+		}
+		else
+			return $id[1];
+	}
 	function api_request($topic,$id,$field='',$url_extra='')
 	{
 		//Topic can be: albums, tracks, playlists
@@ -96,5 +108,17 @@ class tidalinfo
 		$limit=ceil($playlist_info['numberOfTracks']/100)*100;
  		$playlist_tracks=$this->api_request('playlists',$id,'tracks',"&limit=$limit&orderDirection=ASC");
 		return array_merge($playlist_info,$playlist_tracks);
+	}
+	function album_isrc($album)
+	{
+		$album_id=$this->get_id($album,'album');
+		if($album_id===false)
+			return false;
+		$albuminfo=$this->album($album_id,true);
+		if($albuminfo===false)
+			return false;
+		$tracks=array_column($albuminfo['items'],'trackNumber');
+		$isrc=array_column($albuminfo['items'],'isrc');
+		return array_combine($tracks,$isrc);
 	}
 }
