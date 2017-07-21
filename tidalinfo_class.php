@@ -11,9 +11,7 @@ class tidalinfo
 		curl_setopt($this->ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0');
 		curl_setopt($this->ch,CURLOPT_FOLLOWLOCATION,true);
 		curl_setopt($this->ch,CURLOPT_ENCODING,'gzip');
-		/*curl_setopt($this->ch,CURLOPT_PROXY,'192.168.1.112');
-		curl_setopt($this->ch,CURLOPT_PROXYPORT,8888);
-		curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER,false);*/
+		curl_setopt($this->ch,CURLOPT_HTTPHEADER,array('X-Tidal-Token: '.$this->get_token()));
 	}
 	function query($url,$postfields=false)
 	{
@@ -72,12 +70,8 @@ class tidalinfo
 		//Field can be: tracks, contributors or empty
 
 		//Can use sessionId or token
-		if(empty($this->token))
-			$this->token=$this->get_token();
-		if($this->token===false)
-			return false;
 
-		$url=sprintf('http://api.tidalhifi.com/v1/%s/%s/%s?token=%s&countryCode=%s%s',$topic,$id,$field,$this->token,$this->countryCode,$url_extra);
+		$url=sprintf('http://api.tidalhifi.com/v1/%s/%s/%s?countryCode=%s%s',$topic,$id,$field,$this->countryCode,$url_extra);
 		return $this->parse_response($this->query($url));	
 	}
 
