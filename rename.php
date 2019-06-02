@@ -18,7 +18,10 @@ else
 	else
 		$path=$config['inpath_id'];
 
-	$files=array_merge(glob($path.'/*.m4a'),glob($path.'/*.flac'));
+	if(isset($options['id']) && !empty($options['id']))
+		$files=array_merge(glob($path.'/'.$options['id'].'.mp4'), glob($path.'/'.$options['id'].'.m4a'),glob($path.'/'.$options['id'].'.flac'));
+	else
+		$files=array_merge(glob($path.'/*.mp4'), glob($path.'/*.m4a'),glob($path.'/*.flac'));
 	if(empty($files))
 		die(sprintf("No files to be renamed in %s\n",$path));
 
