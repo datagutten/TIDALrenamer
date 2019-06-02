@@ -8,7 +8,7 @@ require_once 'TIDALrenamer.class.php';
 $renamer=new TIDALrenamer;
 
 if(!isset($options))
-	$options = getopt("",array('compilation::','album:','playlist:','order','id','nodelete','flac'));
+	$options = getopt("",array('compilation::','album:','playlist:','order','id::','nodelete','flac'));
 if(empty($options))
 	$error="Sample usage:\nRename a playlist:\tphp rename.php --order --playlist 43acd778-4985-4304-a460-37e5565881b8\nRename an album:\tphp rename.php --order --album 530705\nAlbum and playlist parameters also accepts URLs containing the id.\n";
 else
