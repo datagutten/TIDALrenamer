@@ -1,7 +1,27 @@
 <?Php
-
 class TIDALrenamer
 {
+    /**
+     * @var string Folder for files with id as file name
+     */
+    public $input_path_id;
+    /**
+     * @var string Folder for files with playlist or album position as file name
+     */
+    public $input_path_order;
+    /**
+     * @var string Path for renamed files
+     */
+    public $output_path;
+
+    function __construct()
+    {
+        $config = require 'config.php';
+        $this->input_path_id = $config['input_path_id'];
+        $this->input_path_order = $config['input_path_order'];
+        $this->output_path = $config['output_path'];
+    }
+
     function prepare_metadata($trackinfo, $albuminfo, $playlist = false)
     {
         if (!is_array($trackinfo) || !is_array($albuminfo)) {

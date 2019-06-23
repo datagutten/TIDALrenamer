@@ -1,5 +1,4 @@
 <?Php
-$config = require 'config.php';
 require 'vendor/autoload.php';
 $info=new tidalinfo;
 $metadata=new AudioMetadata;
@@ -19,9 +18,9 @@ if(empty($options)) {
 try
 {
 	if(isset($options['order']))
-		$path=$config['inpath_order'];
+		$path=$renamer->input_path_order;
 	else
-		$path=$config['inpath_id'];
+		$path=$renamer->input_path_id;
 
 	if(isset($options['id']) && !empty($options['id']))
 		$files=array_merge(glob($path.'/'.$options['id'].'.mp4'), glob($path.'/'.$options['id'].'.m4a'),glob($path.'/'.$options['id'].'.flac'));
@@ -95,7 +94,7 @@ foreach($files as $key=>$file)
         else
             $trackinfo=$renamer->prepare_metadata($trackinfo,$albuminfo,false);
 
-        $metadata->metadata($file,$config['sortedpath'],$trackinfo);
+        $metadata->metadata($file,$renamer->output_path,$trackinfo);
         echo "Renamed and tagged $file\n";
         if(!isset($options['nodelete']))
             unlink($file);

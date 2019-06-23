@@ -1,5 +1,4 @@
 <?php
-$config['inpath_id']='/home/music/id_input';
-$config['inpath_order']='/home/music/order_input';
-
-$config['sortedpath']='/home/music';
+$config['input_path_id']='/home/music/id_input';
+$config['input_path_order']='/home/music/order_input';
+$config['output_path']='/home/music';
