@@ -17,9 +17,12 @@ class TIDALrenamer
     function __construct()
     {
         $config = require 'config.php';
-        $this->input_path_id = $config['input_path_id'];
-        $this->input_path_order = $config['input_path_order'];
-        $this->output_path = $config['output_path'];
+        foreach (array('input_path_id', 'input_path_order', 'output_path') as $key)
+        {
+            if(!isset($config[$key]))
+                throw new InvalidArgumentException("Config missing $key");
+            $this->$key = $config[$key];
+        }
     }
 
     function prepare_metadata($trackinfo, $albuminfo, $playlist = false)
