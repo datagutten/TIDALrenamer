@@ -25,10 +25,17 @@ class TIDALrenamer
         }
     }
 
-    function prepare_metadata($trackinfo, $albuminfo, $playlist = false)
+    /**
+     * Prepare metadata from TIDAL to be passed to AudioMetadata methods
+     * @param array $trackinfo
+     * @param array $albuminfo
+     * @param bool $playlist
+     * @return array
+     */
+    public static function prepare_metadata($trackinfo, $albuminfo, $playlist = false)
     {
         if (!is_array($trackinfo) || !is_array($albuminfo)) {
-            return false;
+            throw new InvalidArgumentException('Track info or album info not array');
         }
         $trackinfo['track'] = $trackinfo['trackNumber'];
         $trackinfo['artist'] = $trackinfo['artist']['name'];
