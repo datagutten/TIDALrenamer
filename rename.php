@@ -45,7 +45,7 @@ try
 		{
 			$tracklist=$info->playlist($playlist_id[0]); //Get the tracks on the playlist
 			if($filecount!=$tracklist['numberOfTracks'])
-				die("Playlist countains {$tracklist['numberOfTracks']} tracks, but there is $filecount files in $path");
+				die("Playlist contains {$tracklist['numberOfTracks']} tracks, but there is $filecount files in $path");
 		}
 		else
 			die("Invalid playlist id or URL: {$options['playlist']}");
