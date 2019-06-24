@@ -27,8 +27,8 @@ class TIDALrenamer
 
     /**
      * Prepare metadata from TIDAL to be passed to AudioMetadata methods
-     * @param array $trackinfo
-     * @param array $albuminfo
+     * @param array $trackinfo Return value from TidalInfo::Track
+     * @param array $albuminfo Return value from TidalInfo::Album
      * @param bool $playlist
      * @return array
      */
