@@ -39,18 +39,17 @@ class TIDALrenamer extends TidalInfo
         $files = array();
         foreach ($extensions as $extension)
         {
-            $files += glob(sprintf('%s/*.%s', $this->config['input_path_id'], $extension));
+            $files += glob(sprintf('%s/*.%s', $this->input_path_id, $extension));
         }
         return $files;
     }
-
 
     function load_ordered_files($extensions = array('m4a', 'flac'))
     {
         $files = array();
         foreach ($extensions as $extension)
         {
-            $files += glob(sprintf('%s/*.%s', $this->config['input_path_order'], $extension));
+            $files += glob(sprintf('%s/*.%s', $this->input_path_order, $extension));
         }
         sort($files);
         return $files;
@@ -82,7 +81,7 @@ class TIDALrenamer extends TidalInfo
         $metadata = $this->track_metadata($track);
         $file = AudioMetadata::build_file_name($metadata, $extension);
         $folder = AudioMetadata::build_directory_name($metadata, $extension);
-        $file = sprintf('%s/%s/%s', $this->config['output_path'], $folder, $file);
+        $file = sprintf('%s/%s/%s', $this->output_path, $folder, $file);
         return [$file, $metadata];
     }
 
@@ -100,7 +99,7 @@ class TIDALrenamer extends TidalInfo
         else
             $metadata = $this->track_metadata($track);
 
-        return $this->audio_metadata->metadata($file, $this->config['output_path'], $metadata);
+        return $this->audio_metadata->metadata($file, $this->output_path, $metadata);
     }
 
     /**

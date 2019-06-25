@@ -50,7 +50,7 @@ catch (TidalError $e)
 }
 
 if(empty($files))
-    die(sprintf("No files to be renamed in %s\n",$path));
+    die(sprintf("No files to be renamed in %s\n",$rename->input_path_id));
 
 foreach ($files as $key=>$file)
 {
