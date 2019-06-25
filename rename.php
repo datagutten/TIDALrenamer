@@ -30,7 +30,10 @@ try
         $files = $rename->load_ordered_files();
     } elseif (isset($options['id'])) {
         $mode = 'id';
-        $files = $rename->load_id_files();
+        if(empty($options['id']))
+            $files = $rename->load_id_files();
+        else
+            $files = glob($path = sprintf('%s/%s.*', $rename->input_path_id, $options['id']));
     }
     else
         throw new InvalidArgumentException("No valid options");
