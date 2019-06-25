@@ -1,5 +1,5 @@
 <?Php
-class TIDALrenamer
+class TIDALrenamer extends TidalInfo
 {
     /**
      * @var string Folder for files with id as file name
@@ -13,16 +13,94 @@ class TIDALrenamer
      * @var string Path for renamed files
      */
     public $output_path;
+    /**
+     * @var array Config
+     */
+    public $config;
+    /**
+     * @var AudioMetadata
+     */
+    public $audio_metadata;
 
     function __construct()
     {
-        $config = require 'config.php';
+        $this->config = require 'config.php';
         foreach (array('input_path_id', 'input_path_order', 'output_path') as $key)
         {
-            if(!isset($config[$key]))
+            if(!isset($this->config[$key]))
                 throw new InvalidArgumentException("Config missing $key");
-            $this->$key = $config[$key];
+            $this->$key = $this->config[$key];
         }
+        $this->audio_metadata = new AudioMetadata();
+    }
+
+    function load_id_files($extensions = array('m4a', 'flac'))
+    {
+        $files = array();
+        foreach ($extensions as $extension)
+        {
+            $files += glob(sprintf('%s/*.%s', $this->config['input_path_id'], $extension));
+        }
+        return $files;
+    }
+
+
+    function load_ordered_files($extensions = array('m4a', 'flac'))
+    {
+        $files = array();
+        foreach ($extensions as $extension)
+        {
+            $files += glob(sprintf('%s/*.%s', $this->config['input_path_order'], $extension));
+        }
+        sort($files);
+        return $files;
+    }
+
+    /**
+     * Prepare metadata from TIDAL to be passed to AudioMetadata methods
+     * @param string $track Track ID or URL
+     * @param bool $playlist Part of a playlist
+     * @return array Metadata
+     * @throws TidalError
+     */
+    function track_metadata($track, $playlist=false)
+    {
+        $track_info=$this->track($track);
+        $album_info=$this->album($track_info['album']['id']);
+        return self::prepare_metadata($track_info, $album_info, $playlist);
+    }
+
+    /**
+     * Get filename for a track
+     * @param string $track Track ID or URL
+     * @param string $extension File extension
+     * @return array File name and metadata
+     * @throws TidalError
+     */
+    function track_file($track, $extension='')
+    {
+        $metadata = $this->track_metadata($track);
+        $file = AudioMetadata::build_file_name($metadata, $extension);
+        $folder = AudioMetadata::build_directory_name($metadata, $extension);
+        $file = sprintf('%s/%s/%s', $this->config['output_path'], $folder, $file);
+        return [$file, $metadata];
+    }
+
+    /**
+     * @param string $file File to be renamed
+     * @param string|array $track Can be track id or array with return value of track_metadata()
+     * @throws TidalError Error fetching info from TIDAL
+     * @throws Exception Error writing metadata
+     * @return string Renamed file
+     */
+    function rename($file, $track)
+    {
+        if(is_array($track))
+            $metadata = $track;
+        else
+            $metadata = $this->track_metadata($track);
+
+        return $this->audio_metadata->metadata($file, $this->config['output_path'], $metadata);
     }
 
     /**

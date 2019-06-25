@@ -3,8 +3,9 @@
   "description": "Rename audio files based on albums or playlists on TIDAL",
   "license": "GPL-3.0-or-later",
   "require": {
-    "datagutten/tidal-tools": "*",
-    "datagutten/audio-metadata": "*"
+    "php": ">=7.1",
+    "datagutten/tidal-tools": "^1.2",
+    "datagutten/audio-metadata": "^2.0"
   },
   "autoload": {
     "classmap": [
