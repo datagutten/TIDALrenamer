@@ -2,14 +2,14 @@
   "name": "datagutten/tidal-renamer",
   "description": "Rename audio files based on albums or playlists on TIDAL",
   "license": "GPL-3.0-or-later",
+  "type": "project",
   "require": {
     "php": ">=7.1",
-    "datagutten/tidal-tools": "^1.2",
-    "datagutten/audio-metadata": "^2.0"
+    "datagutten/tidal-tools": "^2.0"
   },
   "autoload": {
     "classmap": [
-      "TIDALrenamer.class.php"
+      "compat.php"
     ]
   }
 }

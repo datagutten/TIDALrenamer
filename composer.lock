@@ -4,73 +4,80 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b1afa178322cc042ab6dc9d8f8a5f82",
+    "content-hash": "b408692ea4e74b95c30f03c031afbc04",
     "packages": [
         {
             "name": "datagutten/audio-metadata",
-            "version": "v2.0",
+            "version": "v3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datagutten/audio-metadata.git",
-                "reference": "d17d094d237db99e27fbb7ce87d359a1c06fa071"
+                "reference": "3db722cb9aecc5e4575e9b95170ac962f7e2f1a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datagutten/audio-metadata/zipball/d17d094d237db99e27fbb7ce87d359a1c06fa071",
-                "reference": "d17d094d237db99e27fbb7ce87d359a1c06fa071",
+                "url": "https://api.github.com/repos/datagutten/audio-metadata/zipball/3db722cb9aecc5e4575e9b95170ac962f7e2f1a1",
+                "reference": "3db722cb9aecc5e4575e9b95170ac962f7e2f1a1",
                 "shasum": ""
             },
             "require": {
                 "datagutten/tools": "^1.1",
+                "php": ">=7.1",
                 "symfony/process": "^4.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.6"
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "AudioMetadata.php",
-                    "AudioConvert.php"
-                ]
+                "psr-4": {
+                    "datagutten\\AudioMetadata\\": "src",
+                    "datagutten\\AudioMetadata\\tests\\": "tests"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
             "description": "Tools for working with metadata in audio files",
-            "time": "2019-06-25T15:48:02+00:00"
+            "time": "2019-07-11T16:52:02+00:00"
         },
         {
             "name": "datagutten/tidal-tools",
-            "version": "v1.3",
+            "version": "v2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datagutten/TIDALtools.git",
-                "reference": "fd61bc57aea62261fc2c07a0d59fe7246a8a2b33"
+                "reference": "42c39dc3ec4fa599dc85d90f85e5446364106de1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datagutten/TIDALtools/zipball/fd61bc57aea62261fc2c07a0d59fe7246a8a2b33",
-                "reference": "fd61bc57aea62261fc2c07a0d59fe7246a8a2b33",
+                "url": "https://api.github.com/repos/datagutten/TIDALtools/zipball/42c39dc3ec4fa599dc85d90f85e5446364106de1",
+                "reference": "42c39dc3ec4fa599dc85d90f85e5446364106de1",
                 "shasum": ""
             },
             "require": {
+                "datagutten/audio-metadata": "^3.0",
                 "ext-json": "*",
-                "php": ">=5.3",
-                "rmccue/requests": ">=1.0"
+                "ext-mbstring": "*",
+                "php": ">=7.1",
+                "rmccue/requests": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.7"
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "tidalinfo.class.php",
-                    "tidalsearch.class.php",
-                    "TidalError.php"
-                ]
+                "psr-4": {
+                    "datagutten\\Tidal\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
             "description": "Tools for fetching info from TIDAL",
-            "time": "2019-06-24T14:37:09+00:00"
+            "time": "2019-07-12T18:45:42+00:00"
         },
         {
             "name": "datagutten/tools",
@@ -158,7 +165,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",

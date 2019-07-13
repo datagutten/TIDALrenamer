@@ -86,7 +86,7 @@ foreach ($files as $key=>$file)
             $renamed_file = $rename->rename($file, $pathinfo['filename']);
         } elseif ($mode == 'order') {
             $trackinfo = $track_list['items'][$key];
-            $info = TIDALrenamer::prepare_metadata($trackinfo, $album);
+            $info = Tidal\Rename::prepare_metadata($trackinfo, $album);
             $renamed_file = $rename->rename($file, $info);
             printf("File %s Title %s Id %d\n", $file, $info['title'], $info['id']);
         }
