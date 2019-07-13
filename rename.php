@@ -1,6 +1,12 @@
 <?Php
+
+use datagutten\AudioMetadata\AudioMetadata;
+use datagutten\AudioMetadata\AudioConvert;
+use datagutten\Tidal\TidalError;
+use datagutten\Tidal;
+
 require 'vendor/autoload.php';
-$rename=new TIDALrenamer;
+$rename=new Tidal\Rename;
 $metadata=new AudioMetadata;
 $track_list = '';
 
