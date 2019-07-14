@@ -6,10 +6,5 @@
   "require": {
     "php": ">=7.1",
     "datagutten/tidal-tools": "^2.0"
-  },
-  "autoload": {
-    "classmap": [
-      "compat.php"
-    ]
   }
 }
