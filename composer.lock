@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b408692ea4e74b95c30f03c031afbc04",
+    "content-hash": "6ba8467a46d626557959872982cfcdd6",
     "packages": [
         {
             "name": "datagutten/audio-metadata",
@@ -350,7 +350,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "composer-runtime-api": "^2.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"

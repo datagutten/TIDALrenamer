@@ -5,6 +5,10 @@
   "type": "project",
   "require": {
     "php": ">=7.1",
-    "datagutten/tidal-tools": "^2.0"
-  }
+    "datagutten/tidal-tools": "^2.0",
+    "composer-runtime-api": "^2.2"
+  },
+    "bin": [
+        "rename.php"
+    ]
 }

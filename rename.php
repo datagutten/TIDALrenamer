@@ -5,7 +5,7 @@ use datagutten\AudioMetadata\AudioConvert;
 use datagutten\Tidal\TidalError;
 use datagutten\Tidal;
 
-require 'vendor/autoload.php';
+include $_composer_autoload_path ?? __DIR__ . '/vendor/autoload.php';
 $rename=new Tidal\Rename;
 $metadata=new AudioMetadata;
 $track_list = '';
